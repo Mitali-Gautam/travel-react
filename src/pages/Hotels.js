@@ -1,12 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import HotelsService from './HotelsService'; 
 
 function Hotels() {
+  const [hotels, setHotels] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchHotels = async () => {
+      try {
+        const data = await HotelsService();
+        setHotels(data);
+        setLoading(false); // Set loading to false after data is fetched
+      } catch (error) {
+        console.error('Error fetching hotels:', error);
+      }
+    };
+    fetchHotels();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>; // Display a loading indicator while fetching data
+  }
+
   return (
     <>
-    <section className="hero-wrap hero-wrap-2 js-fullheight" style={{backgroundImage: 'url(assets/images/bg_1.jpg)'}}>
+    <section className="hero-wrap hero-wrap-2 js-fullheight" style={{backgroundImage: 'url(assets/images/bg_1.jpg)' , height: '304px'}}>
     <div className="overlay"></div>
     <div className="container">
-        <div className="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+        <div className="row no-gutters slider-text js-fullheight align-items-end justify-content-center" style={{height: '304px'}}>
         <div className="col-md-9 ftco-animate pb-5 text-center">
         <p className="breadcrumbs"><span className="mr-2"><a href="index.html">Home <i className="fa fa-chevron-right"></i></a></span> <span>Hotel <i className="fa fa-chevron-right"></i></span></p>
         <h1 className="mb-0 bread">Hotel</h1>
@@ -15,334 +38,34 @@ function Hotels() {
     </div>
     </section>
 
-    <section className="ftco-section ftco-no-pb">
-        <div className="container">
-            <div className="row">
-                <div className="col-md-12">
-                    <div className="search-wrap-1 ftco-animate">
-                        <form action="#" className="search-property-1" name="hotel_seach">
-                            <div className="row no-gutters">
-                                <div className="col-lg d-flex">
-                                    <div className="form-group p-4 border-0">
-                                        <label htmlFor="destination">Destination</label>
-                                        <div className="form-field">
-                                            <div className="icon"><span className="fa fa-search"></span></div>
-                                            <input type="text" name="destination" id="destination" className="form-control" placeholder="Search place" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg d-flex">
-                                    <div className="form-group p-4">
-                                        <label htmlFor="check_in">Check-in date</label>
-                                        <div className="form-field">
-                                            <div className="icon"><span className="fa fa-calendar"></span></div>
-                                            <input type="text" name="check_in" id="check_in" className="form-control checkin_date" placeholder="Check In Date" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg d-flex">
-                                    <div className="form-group p-4">
-                                        <label htmlFor="check_out">Check-out date</label>
-                                        <div className="form-field">
-                                            <div className="icon"><span className="fa fa-calendar"></span></div>
-                                            <input type="text" name="check_out" id="check_out" className="form-control checkout_date" placeholder="Check Out Date" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg d-flex">
-                                    <div className="form-group p-4">
-                                        <label htmlFor="price_limit" id="priceLimit">Price Limit</label>
-                                        <div className="form-field">
-                                            <div className="select-wrap">
-                                                <div className="icon"><span className="fa fa-chevron-down"></span></div>
-                                                <select name="price_limit" id="price_limit" className="form-control">
-                                                    <option value="">$5,000</option>
-                                                    <option value="">$10,000</option>
-                                                    <option value="">$50,000</option>
-                                                    <option value="">$100,000</option>
-                                                    <option value="">$200,000</option>
-                                                    <option value="">$300,000</option>
-                                                    <option value="">$400,000</option>
-                                                    <option value="">$500,000</option>
-                                                    <option value="">$600,000</option>
-                                                    <option value="">$700,000</option>
-                                                    <option value="">$800,000</option>
-                                                    <option value="">$900,000</option>
-                                                    <option value="">$1,000,000</option>
-                                                    <option value="">$2,000,000</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg d-flex">
-                                    <div className="form-group d-flex w-100 border-0">
-                                        <div className="form-field w-100 align-items-center d-flex">
-                                            <input type="submit" value="Search" className="align-self-stretch form-control btn btn-primary" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <section className="ftco-section">
-    <div className="container">
-    <div className="row">
-    <div className="col-md-4 ftco-animate">
-        <div className="project-wrap hotel">
-        <a href="#" className="img" style={{backgroundImage: 'url(aseets/images/hotel-resto-1.jpg)'}}>
-        <span className="price">$200/person</span>
-        </a>
-        <div className="text p-4">
-        <p className="star mb-2">
-            <span className="fa fa-star"></span>
-            <span className="fa fa-star"></span>
-            <span className="fa fa-star"></span>
-            <span className="fa fa-star"></span>
-            <span className="fa fa-star"></span>
-        </p>
-        <span className="days">8 Days Tour</span>
-        <h3><a href="#">Manila Hotel</a></h3>
-        <p className="location"><span className="fa fa-map-marker"></span> Manila, Philippines</p>
-        <ul>
-        <li><span className="flaticon-shower"></span>2</li>
-        <li><span className="flaticon-king-size"></span>3</li>
-        <li><span className="flaticon-mountains"></span>Near Mountain</li>
-        </ul>
-    </div>
-    </div>
-    </div>
-    <div className="col-md-4 ftco-animate">
-    <div className="project-wrap hotel">
-    <a href="#" className="img" style={{backgroundImage: 'url(images/hotel-resto-2.jpg)'}}>
-        <span className="price">$200/person</span>
-    </a>
-    <div className="text p-4">
-        <p className="star mb-2">
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        </p>
-        <span className="days">10 Days Tour</span>
-        <h3><a href="#">Manila Hotel</a></h3>
-        <p className="location"><span className="fa fa-map-marker"></span> Manila, Philippines</p>
-        <ul>
-        <li><span className="flaticon-shower"></span>2</li>
-        <li><span className="flaticon-king-size"></span>3</li>
-        <li><span className="flaticon-sun-umbrella"></span>Near Beach</li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    <div className="col-md-4 ftco-animate">
-    <div className="project-wrap hotel">
-    <a href="#" className="img" style={{backgroundImage: 'url(images/hotel-resto-3.jpg)'}}>
-        <span className="price">$200/person</span>
-    </a>
-    <div className="text p-4">
-        <p className="star mb-2">
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        </p>
-        <span className="days">7 Days Tour</span>
-        <h3><a href="#">Manila Hotel</a></h3>
-        <p className="location"><span className="fa fa-map-marker"></span> Manila, Philippines</p>
-        <ul>
-        <li><span className="flaticon-shower"></span>2</li>
-        <li><span className="flaticon-king-size"></span>3</li>
-        <li><span className="flaticon-sun-umbrella"></span>Near Beach</li>
-    </ul>
-    </div>
-    </div>
-    </div>
-
-    <div className="col-md-4 ftco-animate">
-    <div className="project-wrap hotel">
-    <a href="#" className="img" style={{backgroundImage: 'url(images/hotel-resto-4.jpg)'}}>
-        <span className="price">$200/person</span>
-    </a>
-    <div className="text p-4">
-        <p className="star mb-2">
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        </p>
-        <span className="days">8 Days Tour</span>
-        <h3><a href="#">Manila Hotel</a></h3>
-        <p className="location"><span className="fa fa-map-marker"></span> Manila, Philippines</p>
-        <ul>
-        <li><span className="flaticon-shower"></span>2</li>
-        <li><span className="flaticon-king-size"></span>3</li>
-        <li><span className="flaticon-sun-umbrella"></span>Near Beach</li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    <div className="col-md-4 ftco-animate">
-    <div className="project-wrap hotel">
-    <a href="#" className="img" style={{backgroundImage: 'url(images/hotel-resto-5.jpg)'}}>
-        <span className="price">$200/person</span>
-    </a>
-    <div className="text p-4">
-        <p className="star mb-2">
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        </p>
-        <span className="days">10 Days Tour</span>
-        <h3><a href="#">Manila Hotel</a></h3>
-        <p className="location"><span className="fa fa-map-marker"></span> Manila, Philippines</p>
-        <ul>
-        <li><span className="flaticon-shower"></span>2</li>
-        <li><span className="flaticon-king-size"></span>3</li>
-        <li><span className="flaticon-sun-umbrella"></span>Near Beach</li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    <div className="col-md-4 ftco-animate">
-    <div className="project-wrap hotel">
-    <a href="#" className="img" style={{backgroundImage: 'url(images/hotel-resto-6.jpg)'}}>
-        <span className="price">$200/person</span>
-    </a>
-    <div className="text p-4">
-        <p className="star mb-2">
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        </p>
-        <span className="days">7 Days Tour</span>
-        <h3><a href="#">Manila Hotel</a></h3>
-        <p className="location"><span className="fa fa-map-marker"></span> Manila, Philippines</p>
-        <ul>
-        <li><span className="flaticon-shower"></span>2</li>
-        <li><span className="flaticon-king-size"></span>3</li>
-        <li><span className="flaticon-sun-umbrella"></span>Near Beach</li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    <div className="col-md-4 ftco-animate">
-    <div className="project-wrap hotel">
-    <a href="#" className="img" style={{backgroundImage: 'url(images/hotel-resto-7.jpg)'}}>
-        <span className="price">$200/person</span>
-    </a>
-    <div className="text p-4">
-        <p className="star mb-2">
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        </p>
-        <span className="days">7 Days Tour</span>
-        <h3><a href="#">Manila Hotel</a></h3>
-        <p className="location"><span className="fa fa-map-marker"></span> Manila, Philippines</p>
-        <ul>
-        <li><span className="flaticon-shower"></span>2</li>
-        <li><span className="flaticon-king-size"></span>3</li>
-        <li><span className="flaticon-sun-umbrella"></span>Near Beach</li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    <div className="col-md-4 ftco-animate">
-    <div className="project-wrap hotel">
-    <a href="#" className="img" style={{backgroundImage: 'url(images/hotel-resto-8.jpg)'}}>
-        <span className="price">$200/person</span>
-    </a>
-    <div className="text p-4">
-        <p className="star mb-2">
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        </p>
-        <span className="days">7 Days Tour</span>
-        <h3><a href="#">Manila Hotel</a></h3>
-        <p className="location"><span className="fa fa-map-marker"></span> Manila, Philippines</p>
-        <ul>
-        <li><span className="flaticon-shower"></span>2</li>
-        <li><span className="flaticon-king-size"></span>3</li>
-        <li><span className="flaticon-sun-umbrella"></span>Near Beach</li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    <div className="col-md-4 ftco-animate">
-    <div className="project-wrap hotel">
-    <a href="#" className="img" style={{backgroundImage: 'url(images/hotel-resto-9.jpg)'}}>
-        <span className="price">$200/night</span>
-    </a>
-    <div className="text p-4">
-        <p className="star mb-2">
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        <span className="fa fa-star"></span>
-        </p>
-        <span className="days">3 Days Tour</span>
-        <h3><a href="#">Manila Hotel</a></h3>
-        <p className="location"><span className="fa fa-map-marker"></span> Manila, Philippines</p>
-        <ul>
-        <li><span className="flaticon-shower"></span>2</li>
-        <li><span className="flaticon-king-size"></span>3</li>
-        <li><span className="flaticon-sun-umbrella"></span>Near Beach</li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    </div>
-    <div className="row mt-5">
-    <div className="col text-center">
-        <div className="block-27">
-        <ul>
-            <li><a href="#">&lt;</a></li>
-            <li className="active"><span>1</span></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&gt;</a></li>
-        </ul>
+      <div className="container">
+        <div className="row">
+          {hotels.map(hotel => (
+            <div key={hotel.id} className="col-md-4">
+              <div className="project-wrap hotel">
+                <a href="#" className="img" style={{backgroundImage:`url(${hotel.hotel_temp_image_name})`}}>
+                  
+                </a>
+                <Card.Body className="text p-4">
+                  
+                  <p className="star mb-2">
+                    {[...Array(hotel.star)].map((_, index) => (
+                      <span key={index} className="fa fa-star"></span>
+                    ))}
+                  </p>
+                  <Card.Title>
+                    <Card.Link href={`hotel/${hotel.id}`}>{hotel.name}</Card.Link>
+                  </Card.Title>
+                  <p className="location"><span className="fa fa-map-marker"></span> {hotel.city?.name}, {hotel.country?.name}</p>
+                
+                  <Button as="a" href="#" variant="primary">Book Now</Button>
+                </Card.Body>
+              </div>
+            </div>
+          ))}
         </div>
-    </div>
-    </div>
-    </div>
-    </section>
-
-
-
-    <section className="ftco-intro ftco-section ftco-no-pt">
-    <div className="container">
-    <div className="row justify-content-center">
-    <div className="col-md-12 text-center">
-        <div className="img"  style={{backgroundImage: 'url(images/bg_2.jpg)'}}>
-        <div className="overlay"></div>
-        <h2>We Are Pacific A Travel Agency</h2>
-        <p>We can manage your dream building A small river named Duden flows by their place</p>
-        <p className="mb-0"><a href="#" className="btn btn-primary px-4 py-3">Ask For A Quote</a></p>
-    </div>
-    </div>
-    </div>
-    </div>
+      </div>
     </section>
     </>
   )

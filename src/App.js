@@ -3,6 +3,7 @@ import {Routes, Route } from 'react-router-dom'; // Import BrowserRouter and Rou
 import Home from './pages/Home';
 import Countries from './pages/Countries';
 import Hotels from './pages/Hotels';
+//import HotelsService from './pages/HotelsService';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<Home />} /> {/* Render Hotels component for both "/" and "/Hotels" paths */}
             <Route path="/Countries" element={<Countries />} />
             <Route path="/Hotels" element={<Hotels />} />
+            
           </Routes>
         </main>
         <Footer />

@@ -193,17 +193,21 @@
 
 
 	var contentWayPoint = function() {
+		console.log("abc")
 		var i = 0;
 		$('.ftco-animate').waypoint( function( direction ) {
-
+			console.log("ndndbdbfdbfn")
+			console.log(direction)
+			console.log($(this.element))
 			if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
-				
+				console.log("pqr")	
 				i++;
 
 				$(this.element).addClass('item-animate');
 				setTimeout(function(){
-
+					console.log("mno")
 					$('body .ftco-animate.item-animate').each(function(k){
+						console.log("123")
 						var el = $(this);
 						setTimeout( function () {
 							var effect = el.data('animate-effect');
