@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import Cards from '../components/Cards';
 import HotelsService from './HotelsService'; 
 
 function Hotels() {
@@ -38,35 +37,7 @@ function Hotels() {
     </div>
     </section>
 
-    <section className="ftco-section">
-      <div className="container">
-        <div className="row">
-          {hotels.map(hotel => (
-            <div key={hotel.id} className="col-md-4">
-              <div className="project-wrap hotel">
-                <a href="#" className="img" style={{backgroundImage:`url(${hotel.hotel_temp_image_name})`}}>
-                  
-                </a>
-                <Card.Body className="text p-4">
-                  
-                  <p className="star mb-2">
-                    {[...Array(hotel.star)].map((_, index) => (
-                      <span key={index} className="fa fa-star"></span>
-                    ))}
-                  </p>
-                  <Card.Title>
-                    <Card.Link href={`hotel/${hotel.id}`}>{hotel.name}</Card.Link>
-                  </Card.Title>
-                  <p className="location"><span className="fa fa-map-marker"></span> {hotel.city?.name}, {hotel.country?.name}</p>
-                
-                  <Button as="a" href="#" variant="primary">Book Now</Button>
-                </Card.Body>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <Cards hotels={hotels} />
     </>
   )
 }

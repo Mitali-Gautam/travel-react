@@ -1,22 +1,24 @@
-import React from 'react'
+// Navbar.js
+import React from 'react';
+import menuItemsArr from './MenuItems';
 
 function Navbar() {
   return (
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">Pacific<span>Travel Agency</span></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="oi oi-menu"></span> Menu
+    <nav className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+      <div className="container">
+        <a className="navbar-brand" href="index.html">Pacific<span>Travel Agency</span></a>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="oi oi-menu"></span> Menu
         </button>
 
-        <div class="collapse navbar-collapse" id="ftco-nav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-            <li class="nav-item"><a href="destination.html" class="nav-link">Destination</a></li>
-            <li class="nav-item"><a href="hotel.html" class="nav-link">Hotel</a></li>
-            <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+        <div className="collapse navbar-collapse" id="ftco-nav">
+          <ul className="navbar-nav ml-auto">
+            {menuItemsArr.map((item,index) => (
+              <li key={index} className="nav-item">
+                <a href={item.url} className={item.cName}>{item.title}</a>
+              </li>
+            )
+            )}
           </ul>
         </div>
       </div>
